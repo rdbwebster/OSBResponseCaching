@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment name="" version="v2">
+  <imp:properties xmlns:imp="http://www.bea.com/wli/config/importexport">
+    <imp:property name="username" value="weblogic"/>
+    <imp:property name="description" value=""/>
+    <imp:property name="exporttime" value="Fri Jul 06 14:25:15 EDT 2012"/>
+    <imp:property name="productname" value="Oracle Service Bus"/>
+    <imp:property name="productversion" value="11.1.1.5"/>
+    <imp:property name="projectLevelExport" value="true"/>
+  </imp:properties>
+  <imp:exportedItemInfo instanceId="default/DepartmentFinderBusSvc" typeId="BusinessService" xmlns:imp="http://www.bea.com/wli/config/importexport">
+    <imp:properties>
+      <imp:property name="representationversion" value="3000"/>
+      <imp:property name="dataclass" value="com.bea.wli.sb.services.impl.ServiceDefinitionImpl"/>
+      <imp:property name="isencrypted" value="false"/>
+      <imp:property name="jarentryname" value="default/DepartmentFinderBusSvc.BusinessService"/>
+      <imp:property name="extrefs" value="WSDL$default$DepartmentFinderPort"/>
+    </imp:properties>
+  </imp:exportedItemInfo>
+  <imp:exportedItemInfo instanceId="default/DepartmentFinderProxy" typeId="ProxyService" xmlns:imp="http://www.bea.com/wli/config/importexport">
+    <imp:properties>
+      <imp:property name="representationversion" value="3000"/>
+      <imp:property name="dataclass" value="com.bea.wli.sb.services.impl.ServiceDefinitionImpl"/>
+      <imp:property name="isencrypted" value="false"/>
+      <imp:property name="jarentryname" value="default/DepartmentFinderProxy.ProxyService"/>
+      <imp:property name="extrefs" value="BusinessService$default$DepartmentFinderBusSvc"/>
+      <imp:property name="extrefs" value="WSDL$default$DepartmentFinderPort"/>
+    </imp:properties>
+  </imp:exportedItemInfo>
+  <imp:exportedItemInfo instanceId="default/_projectdata" typeId="LocationData" xmlns:imp="http://www.bea.com/wli/config/importexport">
+    <imp:properties>
+      <imp:property name="representationversion" value="0"/>
+      <imp:property name="dataclass" value="com.bea.wli.config.project.impl.LocationDataImpl"/>
+      <imp:property name="isencrypted" value="false"/>
+      <imp:property name="jarentryname" value="default/_projectdata.LocationData"/>
+      <imp:property name="custom _special_data_class" value="com.bea.wli.config.project.impl.LocationDataImpl"/>
+    </imp:properties>
+  </imp:exportedItemInfo>
+  <imp:exportedItemInfo instanceId="default/DepartmentFinderPort" typeId="WSDL" xmlns:imp="http://www.bea.com/wli/config/importexport">
+    <imp:properties>
+      <imp:property name="representationversion" value="0"/>
+      <imp:property name="dataclass" value="com.bea.wli.sb.resources.config.impl.WsdlEntryDocumentImpl"/>
+      <imp:property name="isencrypted" value="false"/>
+      <imp:property name="jarentryname" value="default/DepartmentFinderPort.WSDL"/>
+      <imp:property name="extrefs" value="XMLSchema$default$DepartmentFinderSchema"/>
+    </imp:properties>
+  </imp:exportedItemInfo>
+  <imp:exportedItemInfo instanceId="default/DepartmentFinderSchema" typeId="XMLSchema" xmlns:imp="http://www.bea.com/wli/config/importexport">
+    <imp:properties>
+      <imp:property name="representationversion" value="0"/>
+      <imp:property name="dataclass" value="com.bea.wli.sb.resources.config.impl.SchemaEntryDocumentImpl"/>
+      <imp:property name="isencrypted" value="false"/>
+      <imp:property name="jarentryname" value="default/DepartmentFinderSchema.XMLSchema"/>
+    </imp:properties>
+  </imp:exportedItemInfo>
+</xml-fragment>

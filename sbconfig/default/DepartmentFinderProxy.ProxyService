@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+  <ser:coreEntry isProxy="true" isEnabled="true" isAutoPublish="false">
+    <ser:description/>
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config">
+      <con:wsdl ref="default/DepartmentFinderPort"/>
+      <con:port>
+        <con:name>DepartmentFinderPort</con:name>
+        <con:namespace>http://departmentdetailsservice/</con:namespace>
+      </con:port>
+      <con:selector type="SOAP body"/>
+      <con:WSI-compliant>false</con:WSI-compliant>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+    <ser:pageAttachments isEnabled="false"/>
+    <ser:transactions isRequired="false" sameTxForResponse="false"/>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>http</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:URI>
+      <env:value>/default/DepartmentFinderProxy</env:value>
+    </tran:URI>
+    <tran:inbound-properties/>
+    <tran:all-headers>false</tran:all-headers>
+    <tran:provider-specific>
+      <http:inbound-properties/>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router>
+    <con:flow>
+      <con:branch-node type="operation" name="BranchNode1">
+        <con:branch-table>
+          <con:branch name="getDepartments">
+            <con:operator>equals</con:operator>
+            <con:value>getDepartments</con:value>
+            <con:flow>
+              <con:route-node name="RouteNode1">
+                <con:context>
+                  <con1:varNsDecl prefix="dep" namespace="http://departmentdetailsservice/"/>
+                </con:context>
+                <con:actions>
+                  <con1:route xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config">
+                    <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-8151229246831366468-7f6a54de.13775e776c4.-7bff</con2:id>
+                    <con1:service ref="default/DepartmentFinderBusSvc" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>getDepartments</con1:operation>
+                    <con1:outboundTransform>
+                      <con2:insert varName="outbound">
+                        <con3:id xmlns:con3="http://www.bea.com/wli/sb/stages/config">_ActionId-8151229246831366468-7f6a54de.13775e776c4.-7ba7</con3:id>
+                        <con2:location>
+                          <con:xpathText xmlns:con="http://www.bea.com/wli/sb/stages/config">./ctx:transport/ctx:request/tp:headers</con:xpathText>
+                        </con2:location>
+                        <con2:where>after</con2:where>
+                        <con2:expr>
+                          <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">&lt;tp:cache-token>
+  string(100)
+&lt;/tp:cache-token></con:xqueryText>
+                        </con2:expr>
+                      </con2:insert>
+                    </con1:outboundTransform>
+                    <con1:responseTransform/>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="getDepartmentDetails">
+            <con:operator>equals</con:operator>
+            <con:value>getDepartmentDetails</con:value>
+            <con:flow>
+              <con:route-node name="RouteNode2">
+                <con:context>
+                  <con1:varNsDecl prefix="dep" namespace="http://departmentdetailsservice/"/>
+                </con:context>
+                <con:actions>
+                  <con1:route xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config">
+                    <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-8151229246831366468-7f6a54de.13775e776c4.-7bfe</con2:id>
+                    <con1:service ref="default/DepartmentFinderBusSvc" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>getDepartmentDetails</con1:operation>
+                    <con1:outboundTransform>
+                      <con2:insert varName="outbound">
+                        <con3:id xmlns:con3="http://www.bea.com/wli/sb/stages/config">_ActionId-8151229246831366468-7f6a54de.13775e776c4.-7b92</con3:id>
+                        <con2:location>
+                          <con:xpathText xmlns:con="http://www.bea.com/wli/sb/stages/config">./ctx:transport/ctx:request/tp:headers</con:xpathText>
+                        </con2:location>
+                        <con2:where>after</con2:where>
+                        <con2:expr>
+                          <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">&lt;tp:cache-token>
+    {$body/dep:getDepartmentDetails/deptNumber}
+  &lt;/tp:cache-token></con:xqueryText>
+                        </con2:expr>
+                      </con2:insert>
+                    </con1:outboundTransform>
+                    <con1:responseTransform/>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="getDepartmentByMgrEmailId">
+            <con:operator>equals</con:operator>
+            <con:value>getDepartmentByMgrEmailId</con:value>
+            <con:flow>
+              <con:route-node name="RouteNode3">
+                <con:context>
+                  <con1:varNsDecl prefix="dep" namespace="http://departmentdetailsservice/"/>
+                </con:context>
+                <con:actions>
+                  <con3:route>
+                    <con1:id>_ActionId-8151229246831366468-7f6a54de.13775e776c4.-7b6c</con1:id>
+                    <con3:service ref="default/DepartmentFinderBusSvc" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con3:operation>getDepartmentByMgrEmailId</con3:operation>
+                    <con3:outboundTransform>
+                      <con2:insert varName="outbound">
+                        <con1:id>_ActionId-8151229246831366468-7f6a54de.13775e776c4.-7b6b</con1:id>
+                        <con2:location>
+                          <con:xpathText xmlns:con="http://www.bea.com/wli/sb/stages/config">./ctx:transport/ctx:request/tp:headers</con:xpathText>
+                        </con2:location>
+                        <con2:where>after</con2:where>
+                        <con2:expr>
+                          <con:xqueryText xmlns:con="http://www.bea.com/wli/sb/stages/config">&lt;tp:cache-token>
+    {$body/dep:getDepartmentByMgrEmailId/mgrEmailId}
+&lt;/tp:cache-token></con:xqueryText>
+                        </con2:expr>
+                      </con2:insert>
+                    </con3:outboundTransform>
+                    <con3:responseTransform/>
+                  </con3:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:default-branch>
+            <con:flow>
+              <con:route-node name="RouteTo_DepartmentFinderBusSvc">
+                <con:actions>
+                  <con1:route xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config">
+                    <conid1:id xmlns:conid1="http://www.bea.com/wli/sb/stages/config">_ActionId-8151229246831366468-7f6a54de.13775e776c4.-7c03</conid1:id>
+                    <con1:service ref="default/DepartmentFinderBusSvc" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation passThrough="true"/>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:default-branch>
+        </con:branch-table>
+      </con:branch-node>
+    </con:flow>
+  </ser:router>
+  <ser:alertRules xsi:nil="true"/>
+</xml-fragment>
